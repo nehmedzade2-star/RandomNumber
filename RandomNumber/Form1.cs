@@ -7,8 +7,8 @@ namespace RandomNumber
 		public Form1()
 		{
 			InitializeComponent();
-			Random r = new Random();
-			num = r.Next(0, 101);
+			button1.Enabled = false;
+			textBox1.Enabled = false;
 		}
 
 		private void groupBox1_Enter(object sender, EventArgs e)
@@ -19,14 +19,6 @@ namespace RandomNumber
 		private void textBox1_TextChanged(object sender, EventArgs e)
 		{
 
-			if (int.TryParse(textBox1.Text, out int deyer))
-			{
-				if (deyer > 100)
-				{
-					textBox1.Text = "100";
-					textBox1.SelectionStart = textBox1.Text.Length;
-				}
-			}
 		}
 
 		private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -46,11 +38,17 @@ namespace RandomNumber
 				return;
 			}
 
+			int texmin = int.Parse(textBox1.Text);
+
+			if (texmin > 100)
+			{
+				errorProvider1.SetError(textBox1, "100-dən böyük ədəd yazmaq olmaz!");
+				return;
+			}
+
 			errorProvider1.Clear();
 			listBox1.Items.Clear();
 			cehdSayi++;
-
-			int texmin = int.Parse(textBox1.Text);
 
 			if (texmin == num)
 			{
